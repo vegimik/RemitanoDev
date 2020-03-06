@@ -1,0 +1,107 @@
+﻿@*@model RemitanoDevTask.ViewModels.HomeViewModel*@
+@model IEnumerable<RemitanoDevTask.Models.Movie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (!@Model.Any())
+{
+    <div class="card mb-3" style="min-width: 540px;">
+        <div class="row no-gutters">
+            <div class="col-md-6">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/GCAv6nUNyJE" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <a href="https://www.youtube.com/watch?v=GCAv6nUNyJE">REMITANO - How Does It Work?</a>
+                    </h2>
+                    <h4 class="card-title">Shared by: Admin</h4>
+                    <h6 class="card-body">Like: 104k & Dislike: 104; Comments: 50k</h6>
+                    <p class="card-text">
+                        <b>ChannelTitle: Remitano - Crypto Exchange</b>
+                    </p>
+                    <p class="card-text">
+                        Description: https://remitano.com
+                        Buy and Sell Bitcoin fast and securely
+                        Protect Your Bitcoin Trades
+                        You are guaranteed best price, safest and fastest solution
+                        Remitano is a decentralized BITCOIN exchange that allows you to simply and safely buy and sell Bitcoin with other users.
+                        With Remitano's smart escrow account system, your Bitcoin are safe and secured during the transaction so you can trade without worries.
+                        Remitano has the lowest fees from all decentralized exchanges and it was designed with an 'easy-to-use' mindset to allow both experienced and new Bitcoin users to easily trade their Bitcoin.
+                        Remitano is already available in X countries and facilitates trades worth more than 1,000 Bitcoin a day across the World.
+                        Among other great functionalities, Remitano App offers:
+                        - Simple and secured sign-up and log-in process
+                        - 2-factor authentification with Authy
+                        - PUSH  Notification to avoid missing any trade
+                        - Chat to discuss with your traders
+                        - Simple offers modification
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">Published at: May 9, 2016</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    @foreach (var item in Model)
+    {
+        <div class="card mb-3" style="min-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-6">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/@Html.DisplayFor(modelItem => item.MovieId)" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            <a href="@item.VideoUrl">@Html.DisplayFor(modelItem => item.Title)</a>
+                        </h2>
+                        <h4 class="card-title">Shared by: @Html.DisplayFor(modelItem => item.SharedBy)</h4>
+                        <h6 class="card-body">Like: @Html.DisplayFor(modelItem => item.LikeCount) & Dislike: @Html.DisplayFor(modelItem => item.DislikeCount); Comments: @Html.DisplayFor(modelItem => item.CommentCount)</h6>
+                        <p class="card-text">
+                            <b>ChannelTitle: @Html.DisplayFor(modelItem => item.ChannelTitle)</b>
+                        </p>
+                        <p class="card-text">
+                            Description:
+                            @if (item.Description.Length > 256)
+                            {
+                            @item.Description.Substring(0, 255)
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Description)
+                        }
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">Published at: @Html.DisplayFor(modelItem => item.PublishedAt)</small>
+                            </p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+}
+
+
+
+
+
+
+
+@*<div class="row">
+
+        @foreach (var movie in Model.MovieOfTheWeek)
+        {
+            @Html.Partial("MovieOfTheWeekSummary", movie)
+        }
+
+    </div>*@
+
+
+
